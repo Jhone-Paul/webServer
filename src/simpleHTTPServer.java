@@ -48,13 +48,10 @@ public class simpleHTTPServer{
             //     line = reader.readLine();
             // }
 
-            while (true) {
             try (Socket socket = server.accept()) {
                 LocalDate today = LocalDate.now();
                 String httpResponse = "HTTP/1.1 200 OK\r\n\r\n" + today;
-                socket.getOutputStream()
-                      .write(httpResponse.getBytes("UTF-8"));
-            }
+                socket.getOutputStream().write(httpResponse.getBytes("UTF-8"));
         }
         }
         
