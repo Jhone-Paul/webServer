@@ -20,4 +20,10 @@ http://localhost:12345
 
 ## future ideas
 
-I want to use this web server to host my website
+- TODO: implement SSL/TLS support
+- Implement multi-threading to handle multiple client connections. (thread pool?)
+- API maybe?
+- caching
+- Other static types of files, images (.jpg, .png, .gif) ect.
+- Add logging to track requests and basic analytics.
+- I want to use this web server to host my website
