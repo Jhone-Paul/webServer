@@ -41,20 +41,6 @@ public class simpleHTTPServer{
         inThread.start();
         while (true){
             Socket client = server.accept();
-            //loop forever baby
-            // InputStreamReader i = new InputStreamReader(client.getInputStream());
-            // BufferedReader reader = new BufferedReader(i);
-            // String line = reader.readLine();
-            // while(!line.isEmpty()){
-            //     System.out.println(line);
-            //     line = reader.readLine();
-            // }
-
-        //     try (Socket socket = server.accept()) {
-        //         LocalDate today = LocalDate.now();
-        //         String httpResponse = "HTTP/1.1 200 OK\r\n\r\n" + today;
-        //         socket.getOutputStream().write(httpResponse.getBytes("UTF-8"));
-        // }
             try {
 
                 BufferedReader reader = new BufferedReader(new InputStreamReader(client.getInputStream()));
@@ -83,8 +69,30 @@ public class simpleHTTPServer{
                     }
 
                     cssFileInputStream.close();
+                    out.close(); 
+                } else if (path.endsWith(".js")) {
+                    String jsFilePath = "src/script.js";
+                    File jsFile = new File(jsFilePath);
+                    FileInputStream jsFileInputStream = new FileInputStream(jsFile);
+                    PrintWriter out = new PrintWriter(client.getOutputStream());
+
+                    out.println("HTTP/1.1 200 OK");
+                    out.println("Content-Type: application/javascript");
+                    out.println("\r\n");
+                    out.flush();
+
+                    byte[] buffer = new byte[4096];
+                    int bytesRead;
+
+                    while ((bytesRead = jsFileInputStream.read(buffer)) != -1) {
+                        out.write(new String(buffer, 0, bytesRead));
+                        out.flush();
+                    }
+
+                    jsFileInputStream.close();
                     out.close();
-                } else {
+                }
+                else {
                 
                     String htmlFilePath = "src/index.html";
                     File htmlFile = new File(htmlFilePath);
@@ -106,6 +114,7 @@ public class simpleHTTPServer{
 
                     htmlFileInputStream.close();
                     out.close();
+                
                 }
                 client.close();
             } catch (IOException e) {
