@@ -27,3 +27,4 @@ http://localhost:12345
 - Other static types of files, images (.jpg, .png, .gif) ect.
 - Add logging to track requests and basic analytics.
 - I want to use this web server to host my website
+- Dynamic content?
