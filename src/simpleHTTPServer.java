@@ -48,6 +48,7 @@ public class simpleHTTPServer{
 
                 BufferedReader reader = new BufferedReader(new InputStreamReader(client.getInputStream()));
                 String requestLine = reader.readLine();
+                //TODO handle this error so it doesnt brick
                 String[] requestParts = requestLine.split(" ");
                 //http method 
                 String method = requestParts[0];
